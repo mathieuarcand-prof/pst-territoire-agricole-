@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portail Géographie 1re sec. — Module 3 : Les territoires agricoles (2026–2027)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Police Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icônes Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f6f4;
+            color: #1e293b;
+        }
+        .fade-in {
+            animation: fadeIn 0.25s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Cartes retournables (Flashcards PFEQ) */
+        .flashcard-inner {
+            transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+        .flashcard-front, .flashcard-back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .flashcard-back {
+            transform: rotateY(180deg);
+        }
+        /* Barres de défilement propres */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-emerald-200 selection:text-emerald-950">
+
+    <!-- EN-TÊTE PRINCIPALE -->
+    <header class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-900 text-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 py-3.5">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                <!-- Titre et sous-titre -->
+                <div class="flex items-center gap-3.5">
+                    <div class="bg-amber-400 text-emerald-950 w-11 h-11 rounded-2xl flex items-center justify-center shadow-md shrink-0">
+                        <i class="fa-solid fa-wheat-awn text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="bg-emerald-700/80 border border-emerald-500/40 text-emerald-100 text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">
+                                1<sup>re</sup> secondaire • PFEQ
+                            </span>
+                            <span class="text-xs text-amber-300 font-semibold">Complètement Géo (2026–2027)</span>
+                        </div>
+                        <h1 class="text-base sm:text-xl font-extrabold tracking-tight leading-snug">
+                            Module 3 : Les territoires agricoles
+                        </h1>
+                    </div>
+                </div>
+
+                <!-- Bouton de téléchargement GitHub Pages -->
+                <div class="flex items-center gap-2 self-start md:self-auto">
+                    <button onclick="openGithubModal()" class="bg-amber-400 hover:bg-amber-300 active:scale-[0.98] text-emerald-950 font-bold text-xs sm:text-sm px-3.5 py-2.5 rounded-xl shadow-md transition flex items-center gap-2">
+                        <i class="fa-brands fa-github text-base"></i>
+                        <span>Télécharger index.html (GitHub Pages)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- NAVIGATION PAR ONGLETS PRINCIPAUX -->
+            <nav class="mt-4 pt-3 border-t border-emerald-800/80 flex gap-2 overflow-x-auto" role="tablist">
+                <button id="tab-btn-teacher" onclick="switchMainTab('teacher')" role="tab" aria-selected="true"
+                    class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-white text-emerald-950 shadow-sm shrink-0">
+                    <i class="fa-solid fa-calendar-check text-emerald-700"></i>
+                    <span>Espace Enseignant &amp; Planification (12 périodes)</span>
+                </button>
+                <button id="tab-btn-student" onclick="switchMainTab('student')" role="tab" aria-selected="false"
+                    class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-emerald-800/60 text-emerald-100 hover:bg-emerald-800 shrink-0">
+                    <i class="fa-solid fa-graduation-cap text-amber-300"></i>
+                    <span>Espace Élèves : Révision, Quiz &amp; Lexique</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6 sm:py-8">
+
+        <!-- ===================================================================== -->
+        <!-- ONGLET 1 : ESPACE ENSEIGNANT & PLANIFICATION (12 PÉRIODES)            -->
+        <!-- ===================================================================== -->
+        <section id="view-teacher" class="fade-in space-y-6">
+
+            <!-- Tableau de bord : Progression + Outil de dates automatiques -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                
+                <!-- Carte 1 : Progression globale du module -->
+                <div class="lg:col-span-5 bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                                Avancement du module
+                            </span>
+                            <span id="teacher-progress-count" class="text-sm font-extrabold text-slate-800">0 / 12 périodes</span>
+                        </div>
+                        <h2 class="text-lg font-extrabold text-slate-900 mb-1">Suivi de la planification</h2>
+                        <p class="text-xs text-slate-500 mb-4">
+                            Cochez chaque période terminée en classe. Votre avancement et vos dates sont enregistrés automatiquement sur cet appareil.
+                        </p>
+                        <!-- Barre de progression -->
+                        <div class="w-full bg-slate-100 rounded-full h-3.5 overflow-hidden border border-slate-200 mb-2">
+                            <div id="teacher-progress-bar" class="bg-gradient-to-r from-emerald-600 to-teal-500 h-full rounded-full transition-all duration-300" style="width: 0%;"></div>
+                        </div>
+                        <p id="teacher-progress-pct" class="text-right text-xs font-bold text-emerald-700">0 % complété</p>
+                    </div>
+
+                    <!-- Boutons de sauvegarde JSON / Réinitialisation -->
+                    <div class="mt-4 pt-4 border-t border-slate-100 flex flex-wrap gap-2">
+                        <button onclick="exportTeacherBackup()" class="text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-xl transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-file-export text-emerald-700"></i> Sauvegarder (.json)
+                        </button>
+                        <label class="text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-xl transition flex items-center gap-1.5 cursor-pointer">
+                            <i class="fa-solid fa-file-import text-teal-700"></i> Restaurer
+                            <input type="file" accept=".json" onchange="importTeacherBackup(event)" class="hidden">
+                        </label>
+                        <button onclick="openResetTeacherModal()" class="text-xs font-semibold bg-rose-50 hover:bg-rose-100 text-rose-700 px-3 py-2 rounded-xl transition flex items-center gap-1.5 ml-auto">
+                            <i class="fa-solid fa-rotate-left"></i> Réinitialiser
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Carte 2 : Planificateur automatique des dates -->
+                <div class="lg:col-span-7 bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-base sm:text-lg font-extrabold text-slate-900">Générateur automatique des dates de cours</h2>
+                            <p class="text-xs text-slate-500">Choisissez une date de début et les jours de cours du groupe pour remplir les 12 périodes.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 mt-4 items-end">
+                        <div class="sm:col-span-5">
+                            <label for="start-date-input" class="block text-xs font-bold text-slate-700 mb-1.5">
+                                Date de la Période 1 :
+                            </label>
+                            <input type="date" id="start-date-input" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+
+                        <div class="sm:col-span-7">
+                            <span class="block text-xs font-bold text-slate-700 mb-1.5">Jours de cours de la semaine :</span>
+                            <div class="flex flex-wrap gap-1.5" id="weekday-selector">
+                                <button type="button" data-day="1" onclick="toggleWeekday(this)" class="day-pill px-2.5 py-1.5 rounded-lg text-xs font-bold border border-emerald-600 bg-emerald-600 text-white transition">Lun</button>
+                                <button type="button" data-day="2" onclick="toggleWeekday(this)" class="day-pill px-2.5 py-1.5 rounded-lg text-xs font-bold border border-slate-300 bg-slate-50 text-slate-600 hover:bg-slate-100 transition">Mar</button>
+                                <button type="button" data-day="3" onclick="toggleWeekday(this)" class="day-pill px-2.5 py-1.5 rounded-lg text-xs font-bold border border-emerald-600 bg-emerald-600 text-white transition">Mer</button>
+                                <button type="button" data-day="4" onclick="toggleWeekday(this)" class="day-pill px-2.5 py-1.5 rounded-lg text-xs font-bold border border-slate-300 bg-slate-50 text-slate-600 hover:bg-slate-100 transition">Jeu</button>
+                                <button type="button" data-day="5" onclick="toggleWeekday(this)" class="day-pill px-2.5 py-1.5 rounded-lg text-xs font-bold border border-emerald-600 bg-emerald-600 text-white transition">Ven</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100">
+                        <span class="text-[11px] text-slate-500">
+                            <i class="fa-solid fa-circle-info text-emerald-600 mr-1"></i> Chaque date reste modifiable manuellement directement dans la carte de la période.
+                        </span>
+                        <button onclick="generateScheduleDates()" class="bg-emerald-700 hover:bg-emerald-800 active:scale-[0.99] text-white font-bold text-xs sm:text-sm px-4 py-2 rounded-xl shadow-sm transition flex items-center gap-2">
+                            <i class="fa-solid fa-calendar-plus"></i>
+                            <span>Appliquer les dates aux 12 périodes</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filtre rapide par section pour l'enseignant -->
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-white px-4 py-3 rounded-2xl border border-slate-200/80 shadow-sm">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider mr-1">Afficher :</span>
+                    <button onclick="filterTeacherSection('all')" class="t-sec-btn bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition" data-sec="all">Toutes les sections (12)</button>
+                    <button onclick="filterTeacherSection('sec1')" class="t-sec-btn bg-slate-100 text-slate-700 hover:bg-slate-200 text-xs font-bold px-3 py-1.5 rounded-xl transition" data-sec="sec1">Section 1 : Survol (P1–P3)</button>
+                    <button onclick="filterTeacherSection('sec2')" class="t-sec-btn bg-slate-100 text-slate-700 hover:bg-slate-200 text-xs font-bold px-3 py-1.5 rounded-xl transition" data-sec="sec2">Section 2 : Québec (P4–P8)</button>
+                    <button onclick="filterTeacherSection('sec3')" class="t-sec-btn bg-slate-100 text-slate-700 hover:bg-slate-200 text-xs font-bold px-3 py-1.5 rounded-xl transition" data-sec="sec3">Section 3 : Monde &amp; Éval. (P9–P12)</button>
+                </div>
+            </div>
+
+            <!-- Conteneur des 3 sections et 12 périodes -->
+            <div id="teacher-periods-container" class="space-y-8">
+                <!-- Généré dynamiquement par JS -->
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- ONGLET 2 : ESPACE ÉLÈVES — RÉVISION, QUIZ & LEXIQUE PFEQ              -->
+        <!-- ===================================================================== -->
+        <section id="view-student" class="hidden fade-in space-y-6">
+
+            <!-- Sous-navigation de l'Espace Élèves -->
+            <div class="bg-white p-2 rounded-2xl shadow-sm border border-slate-200/80 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <button id="subtab-btn-quiz" onclick="switchStudentSubtab('quiz')" class="py-3 px-4 rounded-xl font-bold text-sm transition flex items-center justify-center gap-2 bg-emerald-700 text-white shadow-sm">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <span>1. Quiz interactif (QCM)</span>
+                </button>
+                <button id="subtab-btn-questions" onclick="switchStudentSubtab('questions')" class="py-3 px-4 rounded-xl font-bold text-sm transition flex items-center justify-center gap-2 bg-slate-50 text-slate-700 hover:bg-slate-100">
+                    <i class="fa-solid fa-list-check text-emerald-700"></i>
+                    <span>2. Les 50 questions de révision</span>
+                </button>
+                <button id="subtab-btn-lexique" onclick="switchStudentSubtab('lexique')" class="py-3 px-4 rounded-xl font-bold text-sm transition flex items-center justify-center gap-2 bg-slate-50 text-slate-700 hover:bg-slate-100">
+                    <i class="fa-solid fa-clone text-amber-600"></i>
+                    <span>3. Lexique PFEQ (Flashcards)</span>
+                </button>
+            </div>
+
+            <!-- SOUS-VUE A : QUIZ INTERACTIF (QCM) -->
+            <div id="student-subview-quiz" class="fade-in">
+                <!-- Accueil du Quiz -->
+                <div id="quiz-intro-card" class="bg-white rounded-3xl shadow-sm border border-slate-200/80 overflow-hidden">
+                    <div class="bg-gradient-to-r from-emerald-800 via-emerald-700 to-teal-700 p-6 sm:p-8 text-white relative overflow-hidden">
+                        <div class="relative z-10 max-w-2xl">
+                            <span class="inline-block bg-amber-400 text-emerald-950 font-extrabold text-xs uppercase tracking-wider px-3 py-1 rounded-full mb-2">
+                                Entraînement autonome
+                            </span>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold mb-2">Teste tes connaissances sur le Module 3 !</h2>
+                            <p class="text-emerald-100 text-sm leading-relaxed">
+                                Choisis une section précise ou lance le <strong>Défi d'examen (20 questions)</strong> couvrant l'ensemble des notions du cahier <em>Complètement Géo</em> (pages 114 à 165).
+                            </p>
+                        </div>
+                        <i class="fa-solid fa-tractor text-white/10 text-9xl absolute -bottom-4 -right-4"></i>
+                    </div>
+
+                    <div class="p-6 sm:p-8 space-y-6">
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col sm:flex-row sm:items-center gap-3">
+                            <label for="quiz-student-name" class="text-sm font-bold text-slate-700 shrink-0">
+                                <i class="fa-solid fa-user text-emerald-600 mr-1"></i> Ton prénom (facultatif) :
+                            </label>
+                            <input type="text" id="quiz-student-name" placeholder="Ex. : Camille Roy" class="w-full sm:w-80 px-3.5 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <!-- Mode 1 : Révision ciblée par section -->
+                            <div class="bg-emerald-50/70 border-2 border-emerald-200 rounded-2xl p-6 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="bg-emerald-700 text-white text-xs font-bold px-3 py-1 rounded-full">10 questions</span>
+                                        <i class="fa-solid fa-bullseye text-emerald-700 text-xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-slate-900 mb-1.5">Révision par section</h3>
+                                    <p class="text-xs sm:text-sm text-slate-600 mb-4">Idéal pour réviser après un cours ou un devoir.</p>
+                                    <label for="quiz-section-filter" class="block text-xs font-bold text-slate-700 mb-1">Section à réviser :</label>
+                                    <select id="quiz-section-filter" class="w-full p-2.5 rounded-xl border border-emerald-300 bg-white text-sm font-medium text-slate-800 mb-5 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                        <option value="all">Toutes les sections (10 questions variées)</option>
+                                        <option value="sec1">Section 1 : Survol et enjeux (p. 114–133)</option>
+                                        <option value="sec2">Section 2 : Territoire agricole du Québec (p. 134–157)</option>
+                                        <option value="sec3">Section 3 : Équilibre alimentaire mondial (p. 158–165)</option>
+                                    </select>
+                                </div>
+                                <button onclick="startStudentQuiz('section')" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-5 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                                    <span>Démarrer la série (10 questions)</span>
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                            </div>
+
+                            <!-- Mode 2 : Défi d'examen (20 questions) -->
+                            <div class="bg-amber-50/70 border-2 border-amber-200 rounded-2xl p-6 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="bg-amber-500 text-amber-950 text-xs font-bold px-3 py-1 rounded-full">20 questions</span>
+                                        <i class="fa-solid fa-trophy text-amber-600 text-xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-slate-900 mb-1.5">Défi d'examen complet</h3>
+                                    <p class="text-xs sm:text-sm text-slate-600 mb-4">
+                                        20 questions aléatoires tirées de notre banque couvrant l'ensemble des 50 notions du module.
+                                    </p>
+                                    <ul class="text-xs text-slate-700 space-y-1.5 bg-white/80 p-3 rounded-xl border border-amber-200 mb-5">
+                                        <li><i class="fa-solid fa-check text-emerald-600 mr-1.5"></i>Explications détaillées après chaque réponse</li>
+                                        <li><i class="fa-solid fa-check text-emerald-600 mr-1.5"></i>Renvoi exact aux pages de <em>Complètement Géo</em></li>
+                                        <li><i class="fa-solid fa-check text-emerald-600 mr-1.5"></i>Liste personnalisée des notions à revoir à la fin</li>
+                                    </ul>
+                                </div>
+                                <button onclick="startStudentQuiz('exam')" class="w-full bg-amber-500 hover:bg-amber-600 text-amber-950 font-bold py-3 px-5 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                                    <span>Lancer le défi d'examen (20 questions)</span>
+                                    <i class="fa-solid fa-bolt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Écran actif du Quiz -->
+                <div id="quiz-active-card" class="hidden space-y-5 fade-in">
+                    <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200/80">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                            <div class="flex items-center gap-2">
+                                <span id="q-progress-label" class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-3 py-1 rounded-full">Question 1 / 10</span>
+                                <span id="q-sec-label" class="text-xs font-semibold text-slate-500">Section 1</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="bg-amber-50 border border-amber-200 text-amber-950 text-xs font-extrabold px-3 py-1 rounded-xl">
+                                    <i class="fa-solid fa-star text-amber-500 mr-1"></i> Score : <span id="q-score-val">0</span>
+                                </span>
+                                <button onclick="quitStudentQuiz()" class="text-xs font-semibold text-slate-400 hover:text-rose-600 px-2 py-1 rounded-lg transition">
+                                    Quitter
+                                </button>
+                            </div>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                            <div id="q-progress-bar" class="bg-emerald-600 h-full rounded-full transition-all duration-300" style="width: 10%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-6 sm:p-8">
+                        <h3 id="q-text" class="text-lg sm:text-xl font-bold text-slate-900 leading-relaxed mb-6"></h3>
+                        <div id="q-options" class="space-y-3"></div>
+
+                        <!-- Rétroaction immédiate -->
+                        <div id="q-feedback" class="hidden mt-6 p-5 rounded-2xl border-2 fade-in">
+                            <div class="flex items-start gap-3">
+                                <div id="q-fb-icon" class="text-2xl mt-0.5"></div>
+                                <div class="flex-grow">
+                                    <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                                        <h4 id="q-fb-title" class="font-extrabold text-base"></h4>
+                                        <span id="q-fb-page" class="text-xs font-bold px-3 py-1 rounded-full bg-white border shadow-sm"></span>
+                                    </div>
+                                    <p id="q-fb-desc" class="text-sm leading-relaxed"></p>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex justify-end">
+                                <button id="q-next-btn" onclick="nextStudentQuestion()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm py-2.5 px-6 rounded-xl shadow transition flex items-center gap-2">
+                                    <span>Question suivante</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bilan final du Quiz -->
+                <div id="quiz-results-card" class="hidden bg-white rounded-3xl shadow-sm border border-slate-200/80 overflow-hidden fade-in">
+                    <div class="bg-gradient-to-r from-emerald-900 to-teal-800 p-6 sm:p-8 text-white text-center">
+                        <div class="w-16 h-16 rounded-full bg-white/15 text-amber-300 text-3xl flex items-center justify-center mx-auto mb-3">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold">Bilan de révision — <span id="res-name">Élève</span></h2>
+                        <p class="text-emerald-100 text-sm mt-1">Module 3 : Les territoires agricoles</p>
+                    </div>
+                    <div class="p-6 sm:p-8 space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                                <p class="text-xs font-bold uppercase text-slate-500">Résultat</p>
+                                <p id="res-score" class="text-3xl font-extrabold text-emerald-700 mt-1">16 / 20</p>
+                            </div>
+                            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                                <p class="text-xs font-bold uppercase text-slate-500">Pourcentage</p>
+                                <p id="res-pct" class="text-3xl font-extrabold text-teal-700 mt-1">80 %</p>
+                            </div>
+                            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                                <p class="text-xs font-bold uppercase text-slate-500">Appréciation</p>
+                                <p id="res-mention" class="text-base font-extrabold text-amber-600 mt-2">Très bien !</p>
+                            </div>
+                        </div>
+
+                        <div id="res-missed-container"></div>
+
+                        <div class="flex flex-wrap justify-center gap-3 pt-4 border-t border-slate-100">
+                            <button onclick="restartStudentQuiz()" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-6 rounded-xl shadow transition flex items-center gap-2">
+                                <i class="fa-solid fa-rotate-right"></i> Refaire un quiz
+                            </button>
+                            <button onclick="resetStudentQuizView()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-3 px-6 rounded-xl transition">
+                                Changer de mode
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOUS-VUE B : LES 50 QUESTIONS DE RÉVISION -->
+            <div id="student-subview-questions" class="hidden fade-in space-y-5">
+                <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
+                        <div>
+                            <h2 class="text-xl font-extrabold text-slate-900">Les 50 questions de révision du module</h2>
+                            <p class="text-xs sm:text-sm text-slate-500">Filtre par période ou section, puis clique sur <strong>« Voir un indice / la page »</strong> pour t'aider à trouver la réponse dans ton cahier.</p>
+                        </div>
+                        <span id="questions-count-badge" class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-3.5 py-1.5 rounded-full self-start md:self-auto shrink-0">
+                            50 questions affichées
+                        </span>
+                    </div>
+
+                    <!-- Barre de filtres et recherche -->
+                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+                        <div class="sm:col-span-5">
+                            <div class="relative">
+                                <i class="fa-solid fa-magnifying-glass text-slate-400 absolute left-3.5 top-3 text-sm"></i>
+                                <input type="text" id="q50-search" oninput="render50Questions()" placeholder="Rechercher un mot-clé (ex. : zonage, serre, rangs)..."
+                                    class="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            </div>
+                        </div>
+                        <div class="sm:col-span-4">
+                            <select id="q50-section-filter" onchange="render50Questions()" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm font-medium bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <option value="all">Toutes les sections</option>
+                                <option value="sec1">Section 1 : Survol et enjeux (p. 114–133)</option>
+                                <option value="sec2">Section 2 : Territoire du Québec (p. 134–157)</option>
+                                <option value="sec3">Section 3 : Réalité planétaire (p. 158–165)</option>
+                            </select>
+                        </div>
+                        <div class="sm:col-span-3">
+                            <select id="q50-period-filter" onchange="render50Questions()" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm font-medium bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <option value="all">Toutes les périodes</option>
+                                <option value="1">Période 1 (Devoirs)</option>
+                                <option value="2">Période 2 (Devoirs)</option>
+                                <option value="3">Période 3 (Devoirs)</option>
+                                <option value="4">Période 4 (Devoirs)</option>
+                                <option value="5">Période 5 (Devoirs)</option>
+                                <option value="7">Période 7 (Devoirs)</option>
+                                <option value="8">Période 8 (Devoirs)</option>
+                                <option value="9">Période 9 (Devoirs)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Liste des questions filtrées -->
+                <div id="q50-list-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Généré par JS -->
+                </div>
+            </div>
+
+            <!-- SOUS-VUE C : LEXIQUE INTERACTIF PFEQ (FLASHCARDS) -->
+            <div id="student-subview-lexique" class="hidden fade-in space-y-5">
+                <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">15 concepts prescrits</span>
+                        <h2 class="text-xl font-extrabold text-slate-900 mt-2">Lexique interactif du PFEQ</h2>
+                        <p class="text-xs sm:text-sm text-slate-500">Clique sur une carte pour la retourner et vérifier ta mémorisation de la définition.</p>
+                    </div>
+                    <button onclick="flipAllCards(false)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl transition self-start sm:self-auto shrink-0">
+                        <i class="fa-solid fa-rotate mr-1"></i> Remettre toutes les cartes à l'endroit
+                    </button>
+                </div>
+
+                <div id="flashcards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <!-- Généré par JS -->
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ===================================================================== -->
+    <!-- MODALES (APERÇU DEVOIRS, GITHUB PAGES, RÉINITIALISATION)              -->
+    <!-- ===================================================================== -->
+
+    <!-- Modale 1 : Aperçu rapide des questions liées à un devoir -->
+    <div id="homework-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl fade-in">
+            <div class="p-5 sm:p-6 border-b border-slate-200 flex items-center justify-between">
+                <div>
+                    <span id="hw-modal-badge" class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded-full">Période 1</span>
+                    <h3 id="hw-modal-title" class="text-lg font-extrabold text-slate-900 mt-1">Aperçu des questions de devoir</h3>
+                </div>
+                <button onclick="closeHomeworkModal()" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="hw-modal-body" class="p-5 sm:p-6 overflow-y-auto space-y-3 text-sm">
+                <!-- Questions injectées par JS -->
+            </div>
+            <div class="p-4 border-t border-slate-100 flex justify-end">
+                <button onclick="closeHomeworkModal()" class="bg-slate-900 text-white font-bold text-xs px-5 py-2.5 rounded-xl">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale 2 : Déploiement GitHub Pages & Téléchargement index.html -->
+    <div id="github-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl fade-in my-8">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-5">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-2xl">
+                        <i class="fa-brands fa-github"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-extrabold text-slate-900">Héberger ce portail sur GitHub Pages</h3>
+                        <p class="text-xs text-slate-500">100 % gratuit • Un seul fichier autonome (<code>index.html</code>)</p>
+                    </div>
+                </div>
+                <button onclick="closeGithubModal()" class="text-slate-400 hover:text-slate-700 p-2">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 mb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h4 class="font-extrabold text-emerald-950 text-sm">Étape 0 : Télécharger le fichier autonome</h4>
+                    <p class="text-xs text-emerald-800 mt-0.5">Inclut la planification, les 50 questions, le quiz QCM et les flashcards.</p>
+                </div>
+                <button onclick="downloadIndexHtml()" class="shrink-0 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm py-2.5 px-5 rounded-xl shadow-md transition flex items-center gap-2">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Télécharger index.html</span>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs sm:text-sm text-slate-700">
+                <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+                    <p class="font-extrabold text-slate-900 mb-1">1. Créer un dépôt (Repository) sur GitHub</p>
+                    <p class="text-slate-600">Connectez-vous sur <strong>github.com</strong>, cliquez sur <strong>New repository</strong> (ex. : <code>geo-sec1-territoires-agricoles</code>), cochez <strong>Public</strong> puis cliquez sur <em>Create repository</em>.</p>
+                </div>
+                <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+                    <p class="font-extrabold text-slate-900 mb-1">2. Téléverser le fichier <code>index.html</code></p>
+                    <p class="text-slate-600">Cliquez sur <strong>uploading an existing file</strong>, glissez le fichier <code>index.html</code> téléchargé ci-dessus, puis cliquez sur <strong>Commit changes</strong>.</p>
+                </div>
+                <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+                    <p class="font-extrabold text-slate-900 mb-1">3. Activer GitHub Pages</p>
+                    <p class="text-slate-600">Allez dans <strong>Settings &gt; Pages</strong>, sous <em>Branch</em> sélectionnez <strong>main</strong> puis cliquez sur <strong>Save</strong>. Votre site sera en ligne en ~1 minute à l'adresse <code>https://votre-pseudo.github.io/geo-sec1-territoires-agricoles/</code> à partager dans Google Classroom !</p>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex justify-end">
+                <button onclick="closeGithubModal()" class="bg-slate-900 text-white font-bold text-xs px-5 py-2.5 rounded-xl">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale 3 : Confirmation de réinitialisation enseignant -->
+    <div id="reset-teacher-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl fade-in">
+            <h3 class="text-lg font-extrabold text-slate-900 mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-triangle-exclamation text-rose-600"></i> Réinitialiser le suivi ?
+            </h3>
+            <p class="text-sm text-slate-600 mb-5">
+                Toutes les cases cochées et les dates saisies dans l'onglet Planification seront effacées.
+            </p>
+            <div class="flex justify-end gap-2">
+                <button onclick="closeResetTeacherModal()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs">Annuler</button>
+                <button onclick="confirmResetTeacher()" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs">Oui, tout effacer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PIED DE PAGE -->
+    <footer class="bg-white border-t border-slate-200 py-4 px-4 text-center text-xs text-slate-500 mt-10">
+        Portail pédagogique • Géographie 1<sup>re</sup> secondaire (PFEQ) • Module 3 : Les territoires agricoles (<em>Complètement Géo</em>, 2026–2027)
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- SCRIPT JAVASCRIPT : DONNÉES PÉDAGOGIQUES & INTERACTIVITÉ              -->
+    <!-- ===================================================================== -->
+    <script>
+        // 1. DONNÉES DE PLANIFICATION DES 12 PÉRIODES
+        const periodsData = [
+            {
+                id: 1,
+                section: "sec1",
+                sectionTitle: "Section 1 : Survol (p. 114–133)",
+                title: "Période 1 : Introduction et bases de l'agriculture",
+                steps: [
+                    "<strong>Introduction du module (p. 114–115) :</strong> Question d'ouverture et survol des concepts clés (<span class='font-bold text-emerald-800'>DISTRIBUTION</span>, <span class='font-bold text-emerald-800'>ÉQUITÉ</span>, <span class='font-bold text-emerald-800'>ESPACE AGRICOLE NATIONAL</span>, <span class='font-bold text-emerald-800'>EXPLOITATION AGRICOLE</span>).",
+                    "<strong>Lecture et explications (p. 116–118) :</strong> Définition du territoire agricole, <span class='font-bold text-emerald-800'>RURALITÉ</span>, <span class='font-bold text-emerald-800'>ESPACE AGRICOLE NATIONAL</span>, facteurs naturels favorables, <span class='font-bold text-emerald-800'>INFRASTRUCTURES</span>, productions non alimentaires et 3 étapes de l'industrie agroalimentaire.",
+                    "<strong>Lecture et explications (p. 120–122) :</strong> Les 5 types d'<span class='font-bold text-emerald-800'>EXPLOITATIONS AGRICOLES</span>, formes d'agriculture (commerciale vs subsistance), <span class='font-bold text-emerald-800'>MODES D'AGRICULTURE</span> (intensive vs extensive) et <span class='font-bold text-emerald-800'>PRODUCTIVITÉ</span>."
+                ],
+                homeworkCahier: "Cahier p. 119 et 123",
+                homeworkQuestions: [1, 2, 3, 7, 25, 31, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43]
+            },
+            {
+                id: 2,
+                section: "sec1",
+                sectionTitle: "Section 1 : Survol (p. 114–133)",
+                title: "Période 2 : Les territoires agricoles dans le monde",
+                steps: [
+                    "<strong>Correction des devoirs :</strong> Cahier p. 119, 123 et questions associées.",
+                    "<strong>Lecture et analyse du planisphère (p. 124–125) :</strong> Répartition mondiale de l'agriculture commerciale et de subsistance, facteurs naturels expliquant l'absence d'agriculture (pôles, déserts, montagnes) et études de cas (Californie et fermes verticales au Japon)."
+                ],
+                homeworkCahier: "Cahier p. 126–127 (avec Mes bases en géo)",
+                homeworkQuestions: [4, 24]
+            },
+            {
+                id: 3,
+                section: "sec1",
+                sectionTitle: "Section 1 : Survol (p. 114–133)",
+                title: "Période 3 : Les enjeux des territoires agricoles",
+                steps: [
+                    "<strong>Correction des devoirs :</strong> Cahier p. 126–127 et questions associées.",
+                    "<strong>Lecture et discussion (p. 128–129) — Enjeu 1 (Protéger le territoire agricole) :</strong> <span class='font-bold text-emerald-800'>ÉTALEMENT URBAIN</span>, <span class='font-bold text-emerald-800'>INFRASTRUCTURES</span> non agricoles, relève agricole, <span class='font-bold text-emerald-800'>ZONAGE AGRICOLE</span>, rôle des acteurs et ceinture de verdure de Toronto.",
+                    "<strong>Lecture et discussion (p. 130–131) — Enjeu 2 (Coexistence des formes d'OCCUPATION DU SOL) :</strong> Tensions agriculteurs/citoyens, <span class='font-bold text-emerald-800'>IRRIGATION</span>, haies brise-vent et bandes riveraines."
+                ],
+                homeworkCahier: "Cahier p. 132–133",
+                homeworkQuestions: [5, 6, 8, 26, 27, 28, 30, 44, 45, 46]
+            },
+            {
+                id: 4,
+                section: "sec2",
+                sectionTitle: "Section 2 : Le territoire agricole du Québec (p. 134–157)",
+                title: "Période 4 : Localisation et facteurs naturels au Québec",
+                steps: [
+                    "<strong>Correction des devoirs :</strong> Cahier p. 132–133 et questions associées.",
+                    "<strong>Lecture et repérage géographique (p. 134–135) :</strong> Localisation (45<sup>e</sup> au 49<sup>e</sup> parallèle nord), 2 % du territoire, basses-terres du Saint-Laurent, Appalaches, Bouclier canadien, <span class='font-bold text-emerald-800'>SAISON VÉGÉTATIVE</span>, précipitations, sol argileux, fleuve, rangs (régime français) vs cantons (régime britannique)."
+                ],
+                homeworkCahier: "Cahier p. 136–137 (avec Mes bases en géo)",
+                homeworkQuestions: [10, 32, 47, 48]
+            },
+            {
+                id: 5,
+                section: "sec2",
+                sectionTitle: "Section 2 : Le territoire agricole du Québec (p. 134–157)",
+                title: "Période 5 : L'aménagement du territoire agricole québécois",
+                steps: [
+                    "<strong>Correction des devoirs :</strong> Cahier p. 136–137 et questions associées.",
+                    "<strong>Lecture et explications (p. 138) :</strong> <span class='font-bold text-emerald-800'>AMÉNAGEMENT</span> et <span class='font-bold text-emerald-800'>INFRASTRUCTURES</span> d'adaptation au climat québécois (serres, bâtiments d'élevage, systèmes de drainage, séchoirs et silos à grains).",
+                    "<strong>Lecture et comparaison (p. 139) :</strong> <span class='font-bold text-emerald-800'>AGRICULTURE COMMERCIALE INTENSIVE</span> (impacts sur l'<span class='font-bold text-emerald-800'>ENVIRONNEMENT</span>) vs agriculture biologique."
+                ],
+                homeworkCahier: "Cahier p. 140–141",
+                homeworkQuestions: [11, 12, 13, 49, 50]
+            },
+            {
+                id: 6,
+                section: "sec2",
+                sectionTitle: "Section 2 : Le territoire agricole du Québec (p. 134–157)",
+                title: "Période 6 : Portrait économique et productions du Québec",
+                steps: [
+                    "<strong>Correction des devoirs :</strong> Cahier p. 140–141 et questions associées.",
+                    "<strong>Lecture et analyse de carte (p. 142–143) :</strong> 13 milliards $ de revenus, exportations vs importations et principales productions par région (laitière, céréalière, porcine, maraîchère, avicole, bovine, acéricole)."
+                ],
+                homeworkCahier: "Cahier p. 144–145",
+                homeworkQuestions: []
+            },
+            {
+                id: 7,
+                section: "sec2",
+                sectionTitle: "Section 2 : Le territoire agricole du Québec (p. 134–157)",
+                title: "Période 7 : Les défis de main-d'œuvre et de rentabilité (« juste prix »)",
+                steps: [
+                    "<strong>Correction des devoirs :</strong> Cahier p. 144–145.",
+                    "<strong>Lecture et analyse de graphiques (p. 146) :</strong> Population active en agriculture (0,77 %), pénurie de main-d'œuvre et travailleurs étrangers temporaires (Mexique / Guatemala).",
+                    "<strong>Lecture et explications (p. 148–149) :</strong> Obstacles au « juste prix » (intrants, concurrence étrangère, intermédiaires dans la <span class='font-bold text-emerald-800'>MISE EN MARCHÉ</span> / circuit long, météo extrême) et solutions (coopératives agricoles, programmes gouvernementaux, circuit court)."
+                ],
+                homeworkCahier: "Cahier p. 147 et 150–151",
+                homeworkQuestions: [9, 14, 15, 21, 22, 29]
+            },
+            {
+                id: 8,
+                section: "sec2",
+                sectionTitle: "Section 2 : Le territoire agricole du Québec (p. 134–157)",
+                title: "Période 8 : Protection des terres québécoises et serriculture",
+                steps: [
+                    "<strong>Correction des devoirs :</strong> Cahier p. 147, 150–151 et questions associées.",
+                    "<strong>Lecture du dossier documentaire (p. 152–153) :</strong> LPTAA (1978), CPTAQ, dézonage, Loi sur l'acquisition par des non-résidents (1979), éoliennes, relève agricole, prix des terres, L'ARTERRE et aide financière.",
+                    "<strong>Lecture du dossier documentaire (p. 156) :</strong> Croissance des serres et fermes verticales pour l'autonomie alimentaire."
+                ],
+                homeworkCahier: "Cahier p. 154–155 et 157",
+                homeworkQuestions: [16, 17, 18]
+            },
+            {
+                id: 9,
+                section: "sec3",
+                sectionTitle: "Section 3 : Réalité planétaire et synthèse (p. 158–165)",
+                title: "Période 9 : L'équilibre alimentaire mondial",
+                steps: [
+                    "<strong>Correction des devoirs :</strong> Cahier p. 154–155, 157 et questions associées.",
+                    "<strong>Lecture et analyse des documents mondiaux (p. 158–160) :</strong> 9,7 milliards d'humains en 2050, insécurité alimentaire dans les pays en développement, manque d'<span class='font-bold text-emerald-800'>ÉQUITÉ</span>, accaparement des terres pour l'élevage et les biocarburants (63 %), multinationales, élevage d'insectes et commerce équitable."
+                ],
+                homeworkCahier: "Cahier p. 161–162",
+                homeworkQuestions: [19, 20, 23]
+            },
+            {
+                id: 10,
+                section: "sec3",
+                sectionTitle: "Section 3 : Réalité planétaire et synthèse (p. 158–165)",
+                title: "Période 10 : Synthèse du module",
+                steps: [
+                    "<strong>Correction des devoirs :</strong> Cahier p. 161–162 et questions associées.",
+                    "<strong>Synthèse en classe (p. 163–165) :</strong> Consolidation globale, réseau de concepts du PFEQ et rôle des acteurs dans la protection du territoire."
+                ],
+                homeworkCahier: "Terminer la synthèse p. 163–165",
+                homeworkQuestions: []
+            },
+            {
+                id: 11,
+                section: "sec3",
+                sectionTitle: "Section 3 : Réalité planétaire et synthèse (p. 158–165)",
+                title: "Période 11 : Révision générale",
+                steps: [
+                    "<strong>Correction complète de la synthèse (p. 163–165).</strong>",
+                    "<strong>Activité de révision :</strong> Quiz interactif en ligne et révision des flashcards du lexique PFEQ."
+                ],
+                homeworkCahier: "Étudier les notes de cours, la synthèse et faire le quiz en ligne",
+                homeworkQuestions: []
+            },
+            {
+                id: 12,
+                section: "sec3",
+                sectionTitle: "Section 3 : Réalité planétaire et synthèse (p. 158–165)",
+                title: "Période 12 : ÉVALUATION",
+                isEval: true,
+                steps: [
+                    "<strong>Passation de l'examen de fin de module</strong> (Module 3 : Les territoires agricoles)."
+                ],
+                homeworkCahier: "Aucune tâche (Évaluation sommative)",
+                homeworkQuestions: []
+            }
+        ];
+
+        // 2. LES 50 QUESTIONS DE RÉVISION EXACTES + INDICES & PAGES
+        const questions50Data = [
+            { num: 1, period: 1, sec: "sec1", text: "Comment se fait-il qu'il soit <strong>difficile de se nourrir partout</strong> dans le monde ?", page: "p. 116, 124–125", hint: "Regarde les 6 facteurs naturels nécessaires à l'agriculture (climat, sol, relief, eau, ensoleillement)." },
+            { num: 2, period: 1, sec: "sec1", text: "Quelle est l'<strong>importance</strong> des <strong>territoires agricoles</strong> ?", page: "p. 114, 117, 128", hint: "Ils répondent à un besoin essentiel : nourrir les humains et les animaux (en plus de fournir des matières premières)." },
+            { num: 3, period: 1, sec: "sec1", text: "Nomme <strong>3 produits</strong> qui <strong>ne sont pas alimentaires</strong> et qui proviennent d'un territoire agricole.", page: "p. 117", hint: "Observe l'encadré 3 : fleurs/plantes décoratives ou médicinales, fibres textiles (coton, lin, laine) et biocarburants." },
+            { num: 4, period: 2, sec: "sec1", text: "En quoi les <strong>régions polaires</strong> sont-elles <strong>inadaptées</strong> à l'agriculture ?", page: "p. 116, 124–125", hint: "Pense aux températures très froides, au manque d'ensoleillement et au sol gelé en permanence." },
+            { num: 5, period: 3, sec: "sec1", text: "Pourquoi est-il nécessaire de <strong>protéger les terres agricoles</strong> ?", page: "p. 128", hint: "C'est une ressource non renouvelable essentielle pour nourrir la population, mais sa superficie diminue chaque année." },
+            { num: 6, period: 3, sec: "sec1", text: "Quelles sont les <strong>conséquences</strong> de la <strong>diminution de la superficie</strong> des terres agricoles ?", page: "p. 128", hint: "Consulte la liste des 4 conséquences : baisse du territoire national, hausse du prix des terres, menace alimentaire et contamination." },
+            { num: 7, period: 1, sec: "sec1", text: "Explique la <strong>différence</strong> entre les deux <strong>modes d'agriculture</strong> (<strong>intensive</strong> et <strong>extensive</strong>).", page: "p. 122", hint: "Compare la productivité par surface et les moyens utilisés (machines/produits chimiques vs ressources naturelles et grandes surfaces)." },
+            { num: 8, period: 3, sec: "sec1", text: "Nomme et explique les <strong>deux grands enjeux</strong> liés aux territoires agricoles.", page: "p. 128–131", hint: "Enjeu 1 : Protéger le territoire agricole (contre l'étalement urbain). Enjeu 2 : Faire coexister plusieurs formes d'occupation du sol." },
+            { num: 9, period: 7, sec: "sec2", text: "Quelle est la <strong>solution</strong> utilisée par les agriculteurs québécois pour régler leur problème de <strong>main-d'œuvre</strong> ?", page: "p. 146", hint: "Lis le document 25 : le recrutement de travailleurs venus d'autres pays (surtout du Mexique et du Guatemala)." },
+            { num: 10, period: 4, sec: "sec2", text: "Explique pourquoi les terres agricoles du Québec sont <strong>localisées</strong> majoritairement <strong>au sud</strong> ?", page: "p. 134–135", hint: "Vérifie la latitude (entre 45° et 49° N) et les facteurs naturels des basses-terres du Saint-Laurent (climat plus doux, sol fertile, relief plat)." },
+            { num: 11, period: 5, sec: "sec2", text: "Nomme des <strong>infrastructures</strong> utilisées par les agriculteurs québécois pour <strong>adapter leur production au climat</strong> ?", page: "p. 138", hint: "Consulte le tableau 18 : serres, bâtiments pour l'élevage, systèmes de drainage, séchoirs et silos à grains." },
+            { num: 12, period: 5, sec: "sec2", text: "Quelle est la <strong>différence</strong> entre une <strong>ferme traditionnelle</strong> (d'autrefois) et une <strong>ferme d'aujourd'hui</strong> ?", page: "p. 139", hint: "Autrefois : nombreuses petites fermes combinant culture et élevage. Aujourd'hui : moins de fermes, mais très grandes, mécanisées et spécialisées." },
+            { num: 13, period: 5, sec: "sec2", text: "Quel est l'<strong>impact</strong> de l'<strong>agriculture commerciale intensive</strong> sur l'<strong>environnement</strong> ?", page: "p. 139", hint: "Lis la légende du document 19 : risques liés aux pesticides et engrais chimiques pour les sols, l'eau, la diversité animale et la santé." },
+            { num: 14, period: 7, sec: "sec2", text: "À quelle <strong>difficulté</strong> l'agriculteur québécois est-il confronté lorsqu'il veut vendre ses produits ? (Le problème du <strong>« juste prix »</strong>)", page: "p. 148–149", hint: "Regarde les 3 obstacles du doc. 26 (coût des intrants, concurrence des produits importés, trop d'intermédiaires) + météo extrême." },
+            { num: 15, period: 7, sec: "sec2", text: "Quelles sont les <strong>solutions</strong> à ces difficultés ?", page: "p. 149", hint: "Regarde le doc. 27 : les coopératives agricoles, les programmes gouvernementaux et la vente en circuit court." },
+            { num: 16, period: 8, sec: "sec2", text: "Pourquoi les <strong>jeunes</strong> ont-ils de la <strong>difficulté à devenir agriculteurs</strong> ?", page: "p. 128, 153", hint: "Lis l'encadré D : le transfert des terres est compliqué et le prix des terres agricoles ne cesse d'augmenter." },
+            { num: 17, period: 8, sec: "sec2", text: "Quels <strong>moyens</strong> sont mis en place pour <strong>permettre à des jeunes de devenir agriculteurs</strong> ?", page: "p. 129, 153", hint: "Lis les encadrés F et G : le service de jumelage L'ARTERRE et les subventions/programmes d'appui financier à la relève." },
+            { num: 18, period: 8, sec: "sec2", text: "Nomme <strong>deux lois</strong> que le gouvernement du Québec utilise pour <strong>protéger le territoire agricole</strong>.", page: "p. 152", hint: "Regarde le tableau B : la Loi sur la protection du territoire et des activités agricoles (1978) et la Loi sur l'acquisition de terres par des non-résidents (1979)." },
+            { num: 19, period: 9, sec: "sec3", text: "Pourquoi une grande partie de la population mondiale a-t-elle de la <strong>difficulté à se nourrir sainement</strong> ?", page: "p. 158–160", hint: "Hausse du prix des denrées (terres utilisées pour les biocarburants et l'élevage) et pauvreté dans les pays en développement." },
+            { num: 20, period: 9, sec: "sec3", text: "Quelles sont les <strong>pistes de solutions</strong> pour assurer un meilleur <strong>équilibre alimentaire</strong> dans le monde ?", page: "p. 159", hint: "Lis les encadrés B et C : le commerce équitable et l'élevage d'insectes (en plus de réserver les terres à l'alimentation humaine)." },
+            { num: 21, period: 7, sec: "sec2", text: "Pourquoi les agriculteurs ont-ils de la difficulté à vendre leurs produits au <strong>juste prix</strong> ?", page: "p. 148–149", hint: "Les intrants coûtent plus cher, les produits étrangers sont moins chers et les intermédiaires prennent une part des profits." },
+            { num: 22, period: 7, sec: "sec2", text: "Quel est l'<strong>avantage</strong> d’une <strong>coopérative agricole</strong> ?", page: "p. 149", hint: "Lis l'encadré 27 A : obtenir du soutien financier, acheter les intrants moins cher et accéder à de nouveaux marchés." },
+            { num: 23, period: 9, sec: "sec3", text: "Quelle est la <strong>conséquence</strong> du <strong>manque d’équité</strong> sur la <strong>distribution des aliments</strong> dans le monde ?", page: "p. 158–159", hint: "Les pays en développement n'ont pas les moyens de payer la hausse des prix et souffrent de sous-alimentation / insécurité alimentaire." },
+            { num: 24, period: 2, sec: "sec1", text: "Quelle <strong>solution</strong> pourrait <strong>réduire l’espace utilisé</strong> pour produire la nourriture des humains ?", page: "p. 121, 125, 156, 159", hint: "Pense aux fermes verticales (comme au Japon), à l'élevage d'insectes et à une alimentation moins riche en viande bovine." },
+            { num: 25, period: 1, sec: "sec1", text: "Nomme et explique la <strong>3e étape</strong> de l’<strong>industrie agroalimentaire</strong>.", page: "p. 118", hint: "C'est la distribution : l'ensemble des activités pour acheminer et vendre les produits aux consommateurs (ex. : en épicerie)." },
+            { num: 26, period: 3, sec: "sec1", text: "Nomme <strong>deux raisons</strong> pour lesquelles des <strong>citoyens vivent près des terres agricoles</strong> ?", page: "p. 130", hint: "Lis la section Causes : avoir un espace plus vaste, un milieu de vie plus calme et plus abordable en périphérie des villes." },
+            { num: 27, period: 3, sec: "sec1", text: "<strong>Qui protège</strong> le territoire agricole ?", page: "p. 129, 152", hint: "Les gouvernements (lois, zonage, CPTAQ), les villes, les scientifiques, les citoyens et les organisations environnementales." },
+            { num: 28, period: 3, sec: "sec1", text: "Pourquoi l’<strong>étalement urbain</strong> crée-t-il des <strong>tensions</strong> entre agriculteurs et citoyens ?", page: "p. 130", hint: "Les quartiers résidentiels se rapprochent des fermes : les voisins subissent les odeurs de fumier, le bruit et les tracteurs sur les routes." },
+            { num: 29, period: 7, sec: "sec2", text: "Donne un exemple de <strong>circuit court</strong>.", page: "p. 149", hint: "Un agriculteur qui vend directement ses produits au consommateur (kiosque à la ferme, marché public, paniers fermiers)." },
+            { num: 30, period: 3, sec: "sec1", text: "Quelle est l’<strong>utilité</strong> des <strong>haies brise-vent</strong> ?", page: "p. 131", hint: "C'est une rangée d'arbres ou d'arbustes plantée pour couper le vent et limiter la dispersion des odeurs." },
+            { num: 31, period: 1, sec: "sec1", text: "Nomme <strong>deux caractéristiques</strong> de l’<strong>agriculture de subsistance</strong>.", page: "p. 122", hint: "Sert à nourrir la famille de l'agriculteur (pas pour la vente), pratiquée sur de petites surfaces avec des outils manuels/simples." },
+            { num: 32, period: 4, sec: "sec2", text: "Nomme <strong>deux manières</strong> dont les <strong>terres étaient divisées</strong> au Québec.", page: "p. 135", hint: "Lis Cap sur le passé : en rangs (longues bandes étroites sous le régime français) et en cantons (carrés sous le régime britannique)." },
+            { num: 33, period: 1, sec: "sec1", text: "Quelles sont les <strong>caractéristiques</strong> des <strong>fermes maraîchères</strong> ?", page: "p. 120", hint: "Culture de fruits, petits fruits, légumes et noix ; infrastructures comme des vergers, vignobles ou serres." },
+            { num: 34, period: 1, sec: "sec1", text: "Quelles sont les <strong>caractéristiques</strong> des <strong>fermes acéricoles</strong> ?", page: "p. 120", hint: "Exploitation d'une forêt d'érables pour récolter la sève (avec des tubulures) et fabriquer du sirop d'érable à la cabane à sucre." },
+            { num: 35, period: 1, sec: "sec1", text: "Quelles sont les <strong>caractéristiques</strong> des <strong>fermes aquacoles</strong> ?", page: "p. 120", hint: "Culture de végétaux aquatiques (algues) et élevage d'animaux aquatiques (poissons, mollusques, crustacés) dans des bassins ou en mer." },
+            { num: 36, period: 1, sec: "sec1", text: "Quelles sont les <strong>caractéristiques</strong> des <strong>fermes d’élevage</strong> ?", page: "p. 121", hint: "Élevage d'animaux (bovins, porcs, volailles, abeilles, insectes) pour la viande, le lait, les œufs ou le miel ; étables et enclos." },
+            { num: 37, period: 1, sec: "sec1", text: "Quelles sont les <strong>caractéristiques</strong> des <strong>fermes à grains</strong> ?", page: "p. 121", hint: "Culture de céréales (blé, maïs, riz) ou d'oléagineux (lin, tournesol, soya) ; entreposage dans des silos à grains." },
+            { num: 38, period: 1, sec: "sec1", text: "Nomme <strong>trois facteurs naturels favorables</strong> à l'agriculture.", page: "p. 116", hint: "Températures chaudes, pluies régulières, sols fertiles, relief plat, ensoleillement suffisant, présence d'une source d'eau." },
+            { num: 39, period: 1, sec: "sec1", text: "Quelles sont les <strong>trois étapes</strong> de l'<strong>industrie agroalimentaire</strong> ?", page: "p. 118", hint: "1. Production agricole, 2. Transformation des produits agricoles, 3. Distribution des produits agricoles." },
+            { num: 40, period: 1, sec: "sec1", text: "Qu'est-ce que l'<strong>agriculture commerciale</strong> ?", page: "p. 122", hint: "Forme d'agriculture dont la production est destinée à la vente (surtout dans les pays développés)." },
+            { num: 41, period: 1, sec: "sec1", text: "Qu'est-ce que l'<strong>agriculture de subsistance</strong> ?", page: "p. 122", hint: "Forme d'agriculture qui consiste à produire des aliments pour subvenir aux besoins de l'agriculteur et de sa famille." },
+            { num: 42, period: 1, sec: "sec1", text: "Qu'est-ce que l'<strong>agriculture intensive</strong> ?", page: "p. 122", hint: "Mode d'agriculture visant une productivité maximale sur une surface donnée grâce à la mécanisation et aux intrants." },
+            { num: 43, period: 1, sec: "sec1", text: "Qu'est-ce que l'<strong>agriculture extensive</strong> ?", page: "p. 122", hint: "Mode d'agriculture utilisant surtout les ressources naturelles du territoire et nécessitant de grandes surfaces pour produire plus." },
+            { num: 44, period: 3, sec: "sec1", text: "Qu'est-ce que l'<strong>étalement urbain</strong> ?", page: "p. 128", hint: "Lis le lexique en marge : expansion du territoire urbain en périphérie d'une ville." },
+            { num: 45, period: 3, sec: "sec1", text: "Qu'est-ce que le <strong>zonage agricole</strong> ?", page: "p. 129", hint: "Lis le lexique en marge : protection d'une zone agricole contre le développement résidentiel, énergétique, industriel ou minier." },
+            { num: 46, period: 3, sec: "sec1", text: "Qu'est-ce qu'une <strong>bande riveraine</strong> et quelle est son <strong>utilité</strong> ?", page: "p. 131", hint: "Zone de végétation permanente en bordure des lacs ou rivières servant à limiter l'écoulement des pesticides dans l'eau." },
+            { num: 47, period: 4, sec: "sec2", text: "Quel <strong>pourcentage</strong> du territoire total du Québec est occupé par le territoire agricole ?", page: "p. 134", hint: "Regarde l'encadré « En chiffres » : seulement 2 % de la superficie totale de la province." },
+            { num: 48, period: 4, sec: "sec2", text: "<strong>Où se concentre</strong> principalement le territoire agricole du Québec ?", page: "p. 134", hint: "Dans les basses-terres du Saint-Laurent (plaines fertiles en bordure du fleuve), au sud du 47e parallèle nord." },
+            { num: 49, period: 5, sec: "sec2", text: "Pourquoi les agriculteurs québécois utilisent-ils des <strong>systèmes de drainage</strong> ?", page: "p. 138", hint: "Pour retirer l'excès d'eau du sol causé par le climat très humide et pluvieux du sud du Québec." },
+            { num: 50, period: 5, sec: "sec2", text: "Pourquoi les agriculteurs québécois utilisent-ils des <strong>serres</strong> ?", page: "p. 138, 156", hint: "Pour cultiver des fruits et légumes toute l'année (même en hiver) en contrôlant la température et l'humidité." }
+        ];
+
+        // 3. LEXIQUE DES 15 CONCEPTS PRESCRITS DU PFEQ (FLASHCARDS)
+        const pfeqLexiqueData = [
+            { term: "DISTRIBUTION", page: "p. 115, 118", def: "Ensemble des activités qui ont pour objectif d'acheminer les produits agricoles aux consommateurs locaux et étrangers (3e étape de l'industrie agroalimentaire)." },
+            { term: "ÉQUITÉ", page: "p. 115, 158", def: "Principe fondé sur un équilibre et une justice dans la répartition des ressources alimentaires à l'échelle mondiale." },
+            { term: "ESPACE AGRICOLE NATIONAL", page: "p. 115, 117", def: "Ensemble des terres d'un pays (ou d'une partie d'un pays) sur lesquelles on peut pratiquer l'agriculture." },
+            { term: "EXPLOITATION AGRICOLE", page: "p. 115, 120", def: "Entreprise artisanale ou industrielle (ferme) où l'on pratique la culture de végétaux, l'élevage d'animaux, ou ces deux activités à la fois." },
+            { term: "RURALITÉ", page: "p. 116", def: "Ensemble des caractéristiques associées à la vie à la campagne : population peu nombreuse, petites localités et activités centrées sur l'agriculture." },
+            { term: "INFRASTRUCTURE", page: "p. 117, 138", def: "Ensemble des installations nécessaires au fonctionnement d'un territoire (ex. : silo à grains, étable, serre, système de drainage)." },
+            { term: "MODE D'AGRICULTURE", page: "p. 117, 122", def: "Ensemble de techniques agricoles utilisées pour la culture ou l'élevage (on distingue le mode intensif et le mode extensif)." },
+            { term: "PRODUCTIVITÉ", page: "p. 122", def: "Mesure de l'efficacité de la production par le rapport entre la quantité de produits obtenus et les moyens techniques et humains utilisés." },
+            { term: "ÉTALEMENT URBAIN", page: "p. 128", def: "Expansion du territoire urbain (quartiers résidentiels, commerces, routes) en périphérie d'une ville, empiétant souvent sur les terres agricoles." },
+            { term: "ZONAGE AGRICOLE", page: "p. 129, 152", def: "Protection légale d'une zone agricole contre le développement résidentiel, énergétique, industriel ou minier." },
+            { term: "IRRIGATION", page: "p. 130", def: "Arrosage artificiel d'une terre cultivée pour pallier le manque d'eau ou soutenir la productivité des cultures." },
+            { term: "SAISON VÉGÉTATIVE", page: "p. 135", def: "Nombre de jours consécutifs dans l'année pendant lesquels la température permet aux végétaux de pousser." },
+            { term: "AMÉNAGEMENT", page: "p. 138", def: "Ensemble des actions et des infrastructures mises en place par les humains pour organiser et adapter un territoire agricole à ses contraintes (ex. : climat)." },
+            { term: "ENVIRONNEMENT", page: "p. 139", def: "Ensemble des éléments naturels et artificiels qui entourent l'être humain (pouvant être affectés par les pesticides, engrais et monocultures)." },
+            { term: "MISE EN MARCHÉ", page: "p. 148–149", def: "Action de rendre disponible un produit agricole sur le marché (en circuit long avec intermédiaires ou en circuit court directement au consommateur)." }
+        ];
+
+        // 4. BANQUE DE 35 QUESTIONS QCM COUVRANT L'ENSEMBLE DES 50 NOTIONS
+        const quizBank = [
+            // Section 1
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "Qu'est-ce qui caractérise la <strong>RURALITÉ</strong> d'un territoire agricole ?", opts: ["Une forte densité d'immeubles en hauteur", "Une population peu nombreuse regroupée dans de petites localités vivant surtout de l'agriculture", "Un territoire exclusivement recouvert de forêts", "Des parcs industriels en banlieue"], ans: 1, page: "p. 116", exp: "La ruralité désigne la vie à la campagne : faible densité de population, petites localités et activités centrées sur l'agriculture." },
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "Comment appelle-t-on l'ensemble des terres d'un pays sur lesquelles on peut pratiquer l'agriculture ?", opts: ["L'espace agricole national", "Le circuit agroalimentaire", "La bande riveraine", "Le zonage résidentiel"], ans: 0, page: "p. 117", exp: "L'espace agricole national correspond à l'ensemble des terres cultivables d'un pays." },
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "Lequel de ces éléments est un <strong>facteur naturel favorable</strong> à l'agriculture ?", opts: ["La présence de silos à grains", "Un relief plat et des sols fertiles", "Un réseau d'autoroutes", "La disponibilité de tracteurs"], ans: 1, page: "p. 116", exp: "Les facteurs naturels favorables sont des températures chaudes, des pluies régulières, des sols fertiles, un relief plat, l'ensoleillement et une source d'eau." },
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "Lequel de ces produits est une <strong>production agricole non alimentaire</strong> ?", opts: ["Les biocarburants à base de maïs ou de soya", "Le fromage cheddar", "Les pommes de terre", "La viande de porc"], ans: 0, page: "p. 117", exp: "L'agriculture produit aussi des fleurs, des fibres textiles (coton, lin, laine) et des biocarburants pour remplacer le pétrole." },
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "Quelles sont, dans l'ordre, les <strong>3 étapes de l'industrie agroalimentaire</strong> ?", opts: ["Production agricole, transformation et distribution", "Importation, exportation et vente", "Irrigation, récolte et compostage", "Semis, drainage et élevage"], ans: 0, page: "p. 118", exp: "1) Production à la ferme, 2) Transformation en usine (s'il y a lieu) et 3) Distribution aux consommateurs (ex. : épiceries)." },
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "Quel type de ferme cultive des <strong>fruits, des légumes et des noix</strong> ?", opts: ["Une ferme maraîchère", "Une ferme acéricole", "Une ferme aquacole", "Une ferme à grains"], ans: 0, page: "p. 120", exp: "Les fermes maraîchères cultivent fruits, petits fruits, légumes et noix (vergers, vignobles, serres)." },
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "Dans quel type de ferme utilise-t-on des <strong>tubulures</strong> pour recueillir la sève des arbres ?", opts: ["Une ferme acéricole", "Une ferme aquacole", "Une ferme d'élevage", "Une ferme maraîchère"], ans: 0, page: "p. 120", exp: "Dans les fermes acéricoles (érablières), les tubulures transportent l'eau d'érable jusqu'à la cabane à sucre." },
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "Quelle est la principale différence entre l'<strong>agriculture commerciale</strong> et l'<strong>agriculture de subsistance</strong> ?", opts: ["L'agriculture commerciale vise la vente, tandis que celle de subsistance sert à nourrir l'agriculteur et sa famille", "L'agriculture commerciale n'utilise aucune machine", "L'agriculture de subsistance est pratiquée uniquement au Québec", "L'agriculture commerciale ne produit que des fleurs"], ans: 0, page: "p. 122", exp: "La forme dépend du but : vendre (commerciale, pays développés) ou nourrir sa famille (subsistance, pays en développement)." },
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "Quel <strong>MODE D'AGRICULTURE</strong> vise une <strong>PRODUCTIVITÉ</strong> maximale grâce aux machines, engrais chimiques et pesticides ?", opts: ["L'agriculture intensive", "L'agriculture extensive", "L'agriculture de subsistance", "L'agriculture biologique"], ans: 0, page: "p. 122", exp: "L'agriculture intensive cherche à produire la plus grande quantité possible sur une surface donnée." },
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "Comment augmente-t-on la production en <strong>agriculture extensive</strong> ?", opts: ["En augmentant la superficie des terres destinées à l'agriculture", "En utilisant plus d'antibiotiques et d'OGM", "En construisant des serres chauffées", "En pulvérisant davantage d'insecticides"], ans: 0, page: "p. 122", exp: "L'agriculture extensive utilise surtout la fertilité naturelle du sol ; il faut donc agrandir les surfaces pour produire plus." },
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "Pourquoi n'y a-t-il <strong>pas d'agriculture</strong> dans les régions polaires ?", opts: ["À cause du froid extrême, du sol gelé et du manque d'ensoleillement", "Parce que les lois de l'ONU l'interdisent", "Parce qu'il n'y a aucune eau sur Terre à ces endroits", "À cause des volcans en éruption"], ans: 0, page: "p. 116, 124–125", exp: "Le climat glacial et le sol gelé en permanence empêchent toute culture végétale." },
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "Comment le <strong>Japon</strong> contourne-t-il son manque de terres agricoles planes en milieu urbain ?", opts: ["En développant des fermes verticales sur plusieurs étages", "En important de la terre fertile par avion", "En rasant toutes ses montagnes", "En pratiquant l'élevage extensif"], ans: 0, page: "p. 125", exp: "Les fermes verticales permettent de cultiver sur plusieurs étages à l'intérieur d'édifices en ville." },
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "Quel phénomène correspond à l'expansion des villes en périphérie sur les terres fertiles ?", opts: ["L'étalement urbain", "Le zonage agricole", "La ruralité", "Le circuit court"], ans: 0, page: "p. 128", exp: "L'étalement urbain (maisons, commerces, routes) réduit chaque année la superficie des terres agricoles." },
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "Quelle solution les <strong>promoteurs immobiliers</strong> peuvent-ils adopter pour freiner l'étalement urbain ?", opts: ["Construire des immeubles en hauteur dans les villes", "Construire de grands stationnements en campagne", "Demander le dézonage des terres fertiles", "Bâtir uniquement des maisons avec d'immenses terrains"], ans: 0, page: "p. 129", exp: "Densifier les villes en construisant en hauteur permet de loger plus de gens sans grignoter les terres agricoles." },
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "À quoi sert une <strong>haie brise-vent</strong> plantée par un agriculteur ?", opts: ["À couper le vent pour limiter la dispersion des odeurs", "À empêcher les poissons de quitter un bassin", "À irriguer automatiquement les champs", "À remplacer les silos à grains"], ans: 0, page: "p. 131", exp: "Une haie brise-vent (rangée d'arbres/arbustes) réduit le vent et limite la dispersion des odeurs de fumier vers le voisinage." },
+            { sec: "sec1", secLabel: "Section 1 : Survol et enjeux", q: "Quel est le rôle d'une <strong>bande riveraine</strong> le long des lacs et rivières ?", opts: ["Limiter l'écoulement des pesticides et engrais dans les cours d'eau", "Servir de route pour les tracteurs", "Assécher les nappes souterraines", "Entreposer les récoltes de céréales"], ans: 0, page: "p. 131", exp: "La bande riveraine est une bande de végétation permanente qui filtre l'eau et protège les cours d'eau contre la pollution agricole." },
+
+            // Section 2
+            { sec: "sec2", secLabel: "Section 2 : Territoire du Québec", q: "Quel <strong>pourcentage</strong> de la superficie totale du Québec est occupé par le territoire agricole ?", opts: ["2 %", "18 %", "35 %", "52 %"], ans: 0, page: "p. 134", exp: "En raison de sa position nordique, seulement 2 % de la superficie du Québec est propice à l'agriculture." },
+            { sec: "sec2", secLabel: "Section 2 : Territoire du Québec", q: "Dans quelle région se concentre principalement le <strong>territoire agricole du Québec</strong> ?", opts: ["Les basses-terres du Saint-Laurent", "La baie d'Hudson", "Le Nord-du-Québec", "La Côte-Nord"], ans: 0, page: "p. 134", exp: "Les basses-terres du Saint-Laurent (plaines fertiles bordant le fleuve, au sud du 47e parallèle) concentrent la majorité des fermes." },
+            { sec: "sec2", secLabel: "Section 2 : Territoire du Québec", q: "Qu'est-ce que la <strong>SAISON VÉGÉTATIVE</strong> ?", opts: ["Le nombre de jours consécutifs pendant lesquels les végétaux peuvent pousser", "La saison des sucres au printemps", "La période de gel hivernal", "La durée de vie d'un tracteur"], ans: 0, page: "p. 135", exp: "La saison végétative correspond aux jours consécutifs sans gel permettant la croissance des cultures." },
+            { sec: "sec2", secLabel: "Section 2 : Territoire du Québec", q: "Comment les terres étaient-elles divisées sous le <strong>régime français</strong> dans les plaines du Saint-Laurent ?", opts: ["En rangs (longues bandes étroites touchant un cours d'eau)", "En cantons de forme carrée", "En cercles autour des églises", "En hexagones"], ans: 0, page: "p. 135", exp: "Le système des rangs permettait à chaque ferme d'avoir accès à un cours d'eau (tandis que les cantons carrés datent du régime britannique)." },
+            { sec: "sec2", secLabel: "Section 2 : Territoire du Québec", q: "Pourquoi les agriculteurs québécois installent-ils des <strong>systèmes de drainage</strong> dans leurs champs ?", opts: ["Pour retirer l'excès d'eau causé par le climat humide et pluvieux", "Pour arroser les champs en période de sécheresse", "Pour faire fondre la neige en janvier", "Pour transporter le sirop d'érable"], ans: 0, page: "p. 138", exp: "Les drains souterrains et fossés évacuent l'excès d'eau des sols très humides du sud du Québec." },
+            { sec: "sec2", secLabel: "Section 2 : Territoire du Québec", q: "Quelle infrastructure permet de cultiver des fruits et légumes toute l'année au Québec malgré l'hiver ?", opts: ["Les serres (et fermes verticales)", "Les silos à grains", "Les étables", "Les enclos"], ans: 0, page: "p. 138, 156", exp: "Dans les serres, la température, l'humidité et l'éclairage sont contrôlés pour produire à l'année." },
+            { sec: "sec2", secLabel: "Section 2 : Territoire du Québec", q: "Quelle est la <strong>première production agricole du Québec</strong> en termes de revenus (24 % des revenus) ?", opts: ["La production laitière", "La production acéricole", "La production bovine", "La production avicole"], ans: 0, page: "p. 142–143", exp: "La production laitière (lait, fromage, beurre, yogourt) génère 24 % des revenus agricoles québécois." },
+            { sec: "sec2", secLabel: "Section 2 : Territoire du Québec", q: "Quelle solution aide les agriculteurs québécois à pallier le <strong>manque de main-d'œuvre</strong> ?", opts: ["L'embauche de travailleurs étrangers temporaires (surtout du Mexique et du Guatemala)", "La fermeture des fermes maraîchères", "L'interdiction d'utiliser de la machinerie", "La suppression des récoltes d'automne"], ans: 0, page: "p. 146", exp: "Autorisé par le gouvernement, le recrutement de travailleurs étrangers temporaires comble les besoins saisonniers." },
+            { sec: "sec2", secLabel: "Section 2 : Territoire du Québec", q: "Qu'est-ce qui explique le problème du <strong>« juste prix »</strong> pour les agriculteurs québécois ?", opts: ["La hausse du coût des intrants, la concurrence des produits importés moins chers et les nombreux intermédiaires", "Le refus des Québécois de manger des légumes", "La gratuité du carburant et des engrais", "L'absence de commerces d'alimentation"], ans: 0, page: "p. 148", exp: "Les coûts augmentent, les importations sont souvent moins chères et chaque intermédiaire réduit la marge de l'agriculteur." },
+            { sec: "sec2", secLabel: "Section 2 : Territoire du Québec", q: "Quel est l'avantage de la vente en <strong>circuit court</strong> (ex. : kiosque à la ferme) ?", opts: ["L'agriculteur vend directement au consommateur sans partager le prix avec des intermédiaires", "Les produits voyagent sur plusieurs continents", "Les prix en épicerie doublent automatiquement", "L'agriculteur n'a plus besoin de récolter"], ans: 0, page: "p. 149", exp: "Sans intermédiaires (transformateur, distributeur), le producteur obtient un prix beaucoup plus juste." },
+            { sec: "sec2", secLabel: "Section 2 : Territoire du Québec", q: "Quelle loi adoptée en 1978 protège les terres agricoles du Québec contre le dézonage ?", opts: ["La Loi sur la protection du territoire et des activités agricoles (LPTAA)", "La Loi sur les parcs nationaux", "La Loi sur l'énergie éolienne", "La Loi sur la pêche commerciale"], ans: 0, page: "p. 152", exp: "Appliquée par la CPTAQ, la LPTAA délimite et protège la zone agricole permanente du Québec." },
+            { sec: "sec2", secLabel: "Section 2 : Territoire du Québec", q: "Quel service aide la <strong>relève agricole</strong> en jumelant des aspirants agriculteurs avec des propriétaires de terres ?", opts: ["L'ARTERRE", "Hydro-Québec", "Greenpeace", "La Banque mondiale"], ans: 0, page: "p. 153", exp: "L'ARTERRE facilite l'accès aux terres agricoles (location ou achat) et accompagne les jeunes agriculteurs." },
+
+            // Section 3
+            { sec: "sec3", secLabel: "Section 3 : Réalité planétaire", q: "Combien d'humains la Terre devrait-elle compter en <strong>2050</strong>, posant un défi majeur à l'agriculture ?", opts: ["Environ 9,7 milliards", "Environ 4,2 milliards", "Environ 20 milliards", "Environ 1,5 milliard"], ans: 0, page: "p. 158", exp: "La population atteindra environ 9,7 milliards d'humains en 2050." },
+            { sec: "sec3", secLabel: "Section 3 : Réalité planétaire", q: "Pourquoi une grande partie des terres cultivées (63 %) ne sert-elle <strong>pas directement à nourrir les humains</strong> ?", opts: ["Elles servent à nourrir les animaux d'élevage, à produire des biocarburants ou pour les industries", "Les récoltes sont jetées à la mer", "Les sols ne produisent que des fleurs", "Les humains ne mangent plus de céréales"], ans: 0, page: "p. 158, 160", exp: "Seulement 37 % des terres cultivées nourrissent directement l'humain ; le reste va à l'élevage, aux biocarburants et aux industries." },
+            { sec: "sec3", secLabel: "Section 3 : Réalité planétaire", q: "Sur quels <strong>deux continents</strong> la sous-alimentation touche-t-elle le plus grand nombre de personnes ?", opts: ["L'Asie et l'Afrique", "L'Europe et l'Amérique du Nord", "L'Océanie et l'Antarctique", "L'Amérique du Nord et l'Océanie"], ans: 0, page: "p. 159", exp: "En 2022, sur 735 millions de personnes sous-alimentées, 402 millions vivaient en Asie et 282 millions en Afrique." },
+            { sec: "sec3", secLabel: "Section 3 : Réalité planétaire", q: "Quel aliment demande la <strong>plus grande surface de sol</strong> pour produire 100 g de nourriture ?", opts: ["La viande d'agneau (185 m²) et de bœuf (164 m²)", "Le blé et les légumineuses (3 m²)", "Les œufs (6 m²)", "Le poisson d'élevage (4 m²)"], ans: 0, page: "p. 160", exp: "L'élevage de bœufs et d'agneaux accapare beaucoup plus d'espace que les cultures végétales." },
+            { sec: "sec3", secLabel: "Section 3 : Réalité planétaire", q: "Pourquoi l'<strong>élevage d'insectes</strong> est-il présenté comme une solution d'avenir ?", opts: ["Il fournit des protéines complètes tout en exigeant très peu d'eau, de grains et d'espace", "Il remplace le pétrole dans les moteurs", "Il nécessite d'immenses forêts", "Il augmente les gaz à effet de serre"], ans: 0, page: "p. 121, 159", exp: "L'entomophagie offre un excellent rendement protéique avec une très faible empreinte écologique." },
+            { sec: "sec3", secLabel: "Section 3 : Réalité planétaire", q: "Comment le <strong>commerce équitable</strong> favorise-t-il l'<strong>ÉQUITÉ</strong> alimentaire mondiale ?", opts: ["Il garantit un juste prix aux producteurs des pays en développement et encourage des pratiques écologiques", "Il subventionne uniquement les multinationales", "Il supprime les salaires des travailleurs", "Il encourage la déforestation"], ans: 0, page: "p. 159", exp: "Le commerce équitable assure un revenu digne aux petits producteurs et réduit les inégalités." }
+        ];
+
+        // =====================================================================
+        // GESTION DES ONGLETS PRINCIPAUX ET SOUS-ONGLETS
+        // =====================================================================
+        function switchMainTab(tab) {
+            const teacherView = document.getElementById('view-teacher');
+            const studentView = document.getElementById('view-student');
+            const btnTeacher = document.getElementById('tab-btn-teacher');
+            const btnStudent = document.getElementById('tab-btn-student');
+
+            if (tab === 'teacher') {
+                teacherView.classList.remove('hidden');
+                studentView.classList.add('hidden');
+                btnTeacher.className = "px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-white text-emerald-950 shadow-sm shrink-0";
+                btnStudent.className = "px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-emerald-800/60 text-emerald-100 hover:bg-emerald-800 shrink-0";
+            } else {
+                teacherView.classList.add('hidden');
+                studentView.classList.remove('hidden');
+                btnStudent.className = "px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-white text-emerald-950 shadow-sm shrink-0";
+                btnTeacher.className = "px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center gap-2 bg-emerald-800/60 text-emerald-100 hover:bg-emerald-800 shrink-0";
+            }
+        }
+
+        function switchStudentSubtab(sub) {
+            ['quiz', 'questions', 'lexique'].forEach(name => {
+                const view = document.getElementById(`student-subview-${name}`);
+                const btn = document.getElementById(`subtab-btn-${name}`);
+                if (name === sub) {
+                    view.classList.remove('hidden');
+                    btn.className = "py-3 px-4 rounded-xl font-bold text-sm transition flex items-center justify-center gap-2 bg-emerald-700 text-white shadow-sm";
+                } else {
+                    view.classList.add('hidden');
+                    btn.className = "py-3 px-4 rounded-xl font-bold text-sm transition flex items-center justify-center gap-2 bg-slate-50 text-slate-700 hover:bg-slate-100";
+                }
+            });
+        }
+
+        // =====================================================================
+        // LOGIQUE ONGLET 1 : ESPACE ENSEIGNANT & PLANIFICATION (LOCALSTORAGE)
+        // =====================================================================
+        const STORAGE_KEY = 'geo_sec1_mod3_planif_2026_2027';
+        let teacherState = {
+            completed: {}, // { 1: true, 2: false ... }
+            dates: {}      // { 1: "2026-09-08", ... }
+        };
+        let activeTeacherSectionFilter = 'all';
+
+        function loadTeacherState() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed && typeof parsed === 'object') {
+                        teacherState.completed = parsed.completed || {};
+                        teacherState.dates = parsed.dates || {};
+                    }
+                }
+            } catch (e) {
+                console.warn("Lecture localStorage ignorée :", e);
+            }
+        }
+
+        function saveTeacherState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(teacherState));
+            } catch (e) {
+                console.warn("Sauvegarde localStorage ignorée :", e);
+            }
+            updateTeacherProgress();
+        }
+
+        function updateTeacherProgress() {
+            const total = periodsData.length;
+            const doneCount = periodsData.filter(p => teacherState.completed[p.id]).length;
+            const pct = Math.round((doneCount / total) * 100);
+
+            document.getElementById('teacher-progress-count').textContent = `${doneCount} / ${total} périodes`;
+            document.getElementById('teacher-progress-bar').style.width = `${pct}%`;
+            document.getElementById('teacher-progress-pct').textContent = `${pct} % complété`;
+        }
+
+        function togglePeriodCompleted(id) {
+            teacherState.completed[id] = !teacherState.completed[id];
+            saveTeacherState();
+            renderTeacherPeriods();
+        }
+
+        function updatePeriodDate(id, val) {
+            teacherState.dates[id] = val;
+            saveTeacherState();
+        }
+
+        function toggleWeekday(btn) {
+            const active = btn.classList.contains('bg-emerald-600');
+            if (active) {
+                btn.classList.remove('bg-emerald-600', 'text-white', 'border-emerald-600');
+                btn.classList.add('bg-slate-50', 'text-slate-600', 'border-slate-300');
+            } else {
+                btn.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+                btn.classList.remove('bg-slate-50', 'text-slate-600', 'border-slate-300');
+            }
+        }
+
+        function generateScheduleDates() {
+            const startVal = document.getElementById('start-date-input').value;
+            if (!startVal) {
+                document.getElementById('start-date-input').focus();
+                return;
+            }
+            const selectedDays = Array.from(document.querySelectorAll('#weekday-selector .bg-emerald-600'))
+                .map(btn => parseInt(btn.getAttribute('data-day'), 10));
+
+            if (selectedDays.length === 0) return;
+
+            // Création de la date locale sans décalage horaire
+            const [y, m, d] = startVal.split('-').map(Number);
+            let cursor = new Date(y, m - 1, d);
+            let assigned = 0;
+
+            while (assigned < periodsData.length) {
+                const dayOfWeek = cursor.getDay(); // 0=Dim ... 6=Sam
+                if (selectedDays.includes(dayOfWeek)) {
+                    assigned++;
+                    const yyyy = cursor.getFullYear();
+                    const mm = String(cursor.getMonth() + 1).padStart(2, '0');
+                    const dd = String(cursor.getDate()).padStart(2, '0');
+                    teacherState.dates[assigned] = `${yyyy}-${mm}-${dd}`;
+                }
+                cursor.setDate(cursor.getDate() + 1);
+            }
+
+            saveTeacherState();
+            renderTeacherPeriods();
+        }
+
+        function filterTeacherSection(sec) {
+            activeTeacherSectionFilter = sec;
+            document.querySelectorAll('.t-sec-btn').forEach(btn => {
+                if (btn.getAttribute('data-sec') === sec) {
+                    btn.className = "t-sec-btn bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition";
+                } else {
+                    btn.className = "t-sec-btn bg-slate-100 text-slate-700 hover:bg-slate-200 text-xs font-bold px-3 py-1.5 rounded-xl transition";
+                }
+            });
+            renderTeacherPeriods();
+        }
+
+        function renderTeacherPeriods() {
+            const container = document.getElementById('teacher-periods-container');
+            container.innerHTML = '';
+
+            const sections = [
+                { key: 'sec1', title: 'Section 1 : Survol (p. 114–133)', badge: 'Périodes 1 à 3' },
+                { key: 'sec2', title: 'Section 2 : Le territoire agricole du Québec (p. 134–157)', badge: 'Périodes 4 à 8' },
+                { key: 'sec3', title: 'Section 3 : Réalité planétaire, synthèse et évaluation (p. 158–165)', badge: 'Périodes 9 à 12' }
+            ];
+
+            sections.forEach(sec => {
+                if (activeTeacherSectionFilter !== 'all' && activeTeacherSectionFilter !== sec.key) return;
+
+                const secPeriods = periodsData.filter(p => p.section === sec.key);
+                const secWrapper = document.createElement('div');
+                secWrapper.className = "space-y-4";
+
+                secWrapper.innerHTML = `
+                    <div class="flex items-center justify-between border-b-2 border-emerald-700/20 pb-2">
+                        <h3 class="text-base sm:text-lg font-extrabold text-emerald-950 flex items-center gap-2">
+                            <span class="w-2.5 h-6 rounded-full bg-emerald-700 inline-block"></span>
+                            ${sec.title}
+                        </h3>
+                        <span class="text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full">${sec.badge}</span>
+                    </div>
+                `;
+
+                const cardsGrid = document.createElement('div');
+                cardsGrid.className = "space-y-4";
+
+                secPeriods.forEach(p => {
+                    const isDone = !!teacherState.completed[p.id];
+                    const dateVal = teacherState.dates[p.id] || "";
+                    const hasQuestions = p.homeworkQuestions && p.homeworkQuestions.length > 0;
+
+                    const card = document.createElement('article');
+                    card.className = `rounded-3xl border transition shadow-sm overflow-hidden ${
+                        p.isEval
+                            ? 'bg-amber-50/60 border-amber-300'
+                            : isDone
+                                ? 'bg-emerald-50/40 border-emerald-300'
+                                : 'bg-white border-slate-200/90'
+                    }`;
+
+                    card.innerHTML = `
+                        <div class="p-4 sm:p-6">
+                            <!-- En-tête de la période -->
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+                                <div class="flex items-start sm:items-center gap-3">
+                                    <button onclick="togglePeriodCompleted(${p.id})" aria-label="Marquer la période ${p.id} comme complétée"
+                                        class="w-7 h-7 rounded-xl border-2 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0 transition ${
+                                            isDone
+                                                ? 'bg-emerald-600 border-emerald-600 text-white'
+                                                : 'bg-white border-slate-300 hover:border-emerald-500 text-transparent'
+                                        }">
+                                        <i class="fa-solid fa-check text-xs"></i>
+                                    </button>
+                                    <div>
+                                        <div class="flex items-center gap-2 flex-wrap">
+                                            <h4 class="text-base sm:text-lg font-extrabold ${isDone ? 'text-emerald-900 line-through decoration-emerald-600/50' : 'text-slate-900'}">
+                                                ${p.title}
+                                            </h4>
+                                            ${isDone ? '<span class="bg-emerald-600 text-white text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full">Complétée</span>' : ''}
+                                            ${p.isEval ? '<span class="bg-amber-500 text-amber-950 text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full">Évaluation</span>' : ''}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sélecteur de date manuel -->
+                                <div class="flex items-center gap-2 self-start sm:self-auto bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
+                                    <i class="fa-regular fa-calendar text-emerald-700 text-xs"></i>
+                                    <label class="text-xs font-bold text-slate-600">Date :</label>
+                                    <input type="date" value="${dateVal}" onchange="updatePeriodDate(${p.id}, this.value)"
+                                        class="bg-transparent text-xs font-bold text-slate-800 focus:outline-none">
+                                </div>
+                            </div>
+
+                            <!-- Déroulement et notions -->
+                            <div class="mt-4">
+                                <p class="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2">Déroulement et notions du PFEQ :</p>
+                                <ol class="list-decimal list-inside space-y-2 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                                    ${p.steps.map(step => `<li>${step}</li>`).join('')}
+                                </ol>
+                            </div>
+
+                            <!-- Devoirs et aperçu des questions -->
+                            <div class="mt-4 pt-3.5 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <div class="text-xs sm:text-sm">
+                                    <span class="font-extrabold text-amber-800"><i class="fa-solid fa-pencil mr-1"></i> Devoirs :</span>
+                                    <span class="font-semibold text-slate-800">${p.homeworkCahier}</span>
+                                    ${hasQuestions ? `<span class="text-slate-500"> • Feuille de questions : <strong class="text-emerald-800">#${p.homeworkQuestions.join(', ')}</strong></span>` : ''}
+                                </div>
+
+                                ${hasQuestions ? `
+                                    <button onclick="openHomeworkPreview(${p.id})" class="shrink-0 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 font-bold text-xs px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 self-start sm:self-auto">
+                                        <i class="fa-solid fa-eye text-emerald-700"></i>
+                                        <span>Aperçu des ${p.homeworkQuestions.length} questions</span>
+                                    </button>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                    cardsGrid.appendChild(card);
+                });
+
+                secWrapper.appendChild(cardsGrid);
+                container.appendChild(secWrapper);
+            });
+        }
+
+        // Aperçu des questions liées aux devoirs d'une période
+        function openHomeworkPreview(periodId) {
+            const p = periodsData.find(item => item.id === periodId);
+            if (!p) return;
+
+            document.getElementById('hw-modal-badge').textContent = `Période ${p.id}`;
+            document.getElementById('hw-modal-title').textContent = `Devoirs — ${p.title}`;
+
+            const body = document.getElementById('hw-modal-body');
+            body.innerHTML = '';
+
+            p.homeworkQuestions.forEach(qNum => {
+                const qObj = questions50Data.find(item => item.num === qNum);
+                if (qObj) {
+                    const div = document.createElement('div');
+                    div.className = "p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start justify-between gap-3";
+                    div.innerHTML = `
+                        <div>
+                            <span class="font-extrabold text-emerald-800 mr-1.5">#${qObj.num}.</span>
+                            <span class="text-slate-800">${qObj.text}</span>
+                        </div>
+                        <span class="shrink-0 bg-white border border-slate-200 text-slate-600 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                            ${qObj.page}
+                        </span>
+                    `;
+                    body.appendChild(div);
+                }
+            });
+
+            document.getElementById('homework-modal').classList.remove('hidden');
+        }
+
+        function closeHomeworkModal() {
+            document.getElementById('homework-modal').classList.add('hidden');
+        }
+
+        // Sauvegarde & Restauration JSON
+        function exportTeacherBackup() {
+            const blob = new Blob([JSON.stringify(teacherState, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'sauvegarde_planification_geo_module3.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function importTeacherBackup(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    if (data && typeof data === 'object') {
+                        teacherState.completed = data.completed || {};
+                        teacherState.dates = data.dates || {};
+                        saveTeacherState();
+                        renderTeacherPeriods();
+                    }
+                } catch (err) {
+                    console.error("Fichier JSON invalide", err);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function openResetTeacherModal() {
+            document.getElementById('reset-teacher-modal').classList.remove('hidden');
+        }
+        function closeResetTeacherModal() {
+            document.getElementById('reset-teacher-modal').classList.add('hidden');
+        }
+        function confirmResetTeacher() {
+            teacherState = { completed: {}, dates: {} };
+            saveTeacherState();
+            renderTeacherPeriods();
+            closeResetTeacherModal();
+        }
+
+        // =====================================================================
+        // LOGIQUE ONGLET 2A : QUIZ INTERACTIF ÉLÈVES (QCM)
+        // =====================================================================
+        let currentQuizList = [];
+        let qIdx = 0;
+        let qScore = 0;
+        let qMissed = [];
+        let qLastMode = 'section';
+        let qAnswered = false;
+
+        function shuffle(arr) {
+            const copy = [...arr];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        function startStudentQuiz(mode) {
+            qLastMode = mode;
+            qIdx = 0;
+            qScore = 0;
+            qMissed = [];
+
+            if (mode === 'section') {
+                const secVal = document.getElementById('quiz-section-filter').value;
+                const pool = secVal === 'all' ? quizBank : quizBank.filter(item => item.sec === secVal);
+                currentQuizList = shuffle(pool).slice(0, 10);
+            } else {
+                currentQuizList = shuffle(quizBank).slice(0, 20);
+            }
+
+            document.getElementById('quiz-intro-card').classList.add('hidden');
+            document.getElementById('quiz-results-card').classList.add('hidden');
+            document.getElementById('quiz-active-card').classList.remove('hidden');
+
+            renderStudentQuestion();
+        }
+
+        function renderStudentQuestion() {
+            qAnswered = false;
+            const item = currentQuizList[qIdx];
+            const total = currentQuizList.length;
+
+            document.getElementById('q-progress-label').textContent = `Question ${qIdx + 1} / ${total}`;
+            document.getElementById('q-sec-label').textContent = item.secLabel;
+            document.getElementById('q-score-val').textContent = qScore;
+            document.getElementById('q-progress-bar').style.width = `${Math.max((qIdx / total) * 100, 5)}%`;
+            document.getElementById('q-text').innerHTML = item.q;
+
+            const indexedOpts = item.opts.map((text, idx) => ({ text, isCorrect: idx === item.ans }));
+            const mixedOpts = shuffle(indexedOpts);
+            const letters = ['A', 'B', 'C', 'D'];
+
+            const optsDiv = document.getElementById('q-options');
+            optsDiv.innerHTML = '';
+
+            mixedOpts.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-2xl border-2 border-slate-200 bg-slate-50/70 hover:bg-emerald-50 hover:border-emerald-500 transition flex items-center gap-3.5 group";
+                btn.innerHTML = `
+                    <span class="w-8 h-8 rounded-xl bg-white border border-slate-300 group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600 font-extrabold text-xs flex items-center justify-center shrink-0 transition">
+                        ${letters[i]}
+                    </span>
+                    <span class="text-sm sm:text-base font-medium text-slate-800">${opt.text}</span>
+                `;
+                btn.onclick = () => checkStudentAnswer(btn, opt.isCorrect, mixedOpts, item);
+                optsDiv.appendChild(btn);
+            });
+
+            document.getElementById('q-feedback').classList.add('hidden');
+            document.getElementById('q-next-btn').innerHTML = qIdx === total - 1
+                ? `<span>Voir mon bilan final</span> <i class="fa-solid fa-flag-checkered"></i>`
+                : `<span>Question suivante</span> <i class="fa-solid fa-arrow-right"></i>`;
+        }
+
+        function checkStudentAnswer(clickedBtn, isCorrect, mixedOpts, item) {
+            if (qAnswered) return;
+            qAnswered = true;
+
+            const allBtns = document.getElementById('q-options').querySelectorAll('button');
+            allBtns.forEach((btn, idx) => {
+                btn.disabled = true;
+                btn.classList.remove('hover:bg-emerald-50', 'hover:border-emerald-500');
+                const o = mixedOpts[idx];
+                if (o.isCorrect) {
+                    btn.classList.remove('border-slate-200', 'bg-slate-50/70');
+                    btn.classList.add('border-emerald-500', 'bg-emerald-50', 'ring-2', 'ring-emerald-200');
+                    btn.querySelector('span:first-child').classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+                } else if (btn === clickedBtn && !isCorrect) {
+                    btn.classList.remove('border-slate-200', 'bg-slate-50/70');
+                    btn.classList.add('border-rose-500', 'bg-rose-50');
+                    btn.querySelector('span:first-child').classList.add('bg-rose-600', 'text-white', 'border-rose-600');
+                } else {
+                    btn.classList.add('opacity-50');
+                }
+            });
+
+            const fb = document.getElementById('q-feedback');
+            const fbIcon = document.getElementById('q-fb-icon');
+            const fbTitle = document.getElementById('q-fb-title');
+            const fbPage = document.getElementById('q-fb-page');
+            const fbDesc = document.getElementById('q-fb-desc');
+
+            fb.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-300', 'text-emerald-950', 'bg-rose-50', 'border-rose-300', 'text-rose-950');
+            fbPage.textContent = `Cahier : ${item.page}`;
+
+            if (isCorrect) {
+                qScore++;
+                document.getElementById('q-score-val').textContent = qScore;
+                fb.classList.add('bg-emerald-50', 'border-emerald-300', 'text-emerald-950');
+                fbIcon.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600"></i>`;
+                fbTitle.textContent = "Bonne réponse !";
+                fbPage.className = "text-xs font-bold px-3 py-1 rounded-full bg-white text-emerald-800 border border-emerald-200 shadow-sm";
+            } else {
+                qMissed.push(item);
+                fb.classList.add('bg-rose-50', 'border-rose-300', 'text-rose-950');
+                fbIcon.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600"></i>`;
+                fbTitle.textContent = "À revoir dans le cahier";
+                fbPage.className = "text-xs font-bold px-3 py-1 rounded-full bg-white text-rose-800 border border-rose-200 shadow-sm";
+            }
+
+            fbDesc.textContent = item.exp;
+        }
+
+        function nextStudentQuestion() {
+            qIdx++;
+            if (qIdx < currentQuizList.length) {
+                renderStudentQuestion();
+            } else {
+                showStudentResults();
+            }
+        }
+
+        function showStudentResults() {
+            document.getElementById('quiz-active-card').classList.add('hidden');
+            document.getElementById('quiz-results-card').classList.remove('hidden');
+
+            const total = currentQuizList.length;
+            const pct = Math.round((qScore / total) * 100);
+            const nameInput = document.getElementById('quiz-student-name').value.trim();
+
+            document.getElementById('res-name').textContent = nameInput || "Élève";
+            document.getElementById('res-score').textContent = `${qScore} / ${total}`;
+            document.getElementById('res-pct').textContent = `${pct} %`;
+
+            const mention = document.getElementById('res-mention');
+            if (pct >= 85) {
+                mention.textContent = "Maîtrise exceptionnelle !";
+                mention.className = "text-base font-extrabold text-emerald-600 mt-2";
+            } else if (pct >= 70) {
+                mention.textContent = "Très bon travail !";
+                mention.className = "text-base font-extrabold text-teal-600 mt-2";
+            } else if (pct >= 50) {
+                mention.textContent = "En bonne voie !";
+                mention.className = "text-base font-extrabold text-amber-600 mt-2";
+            } else {
+                mention.textContent = "À réviser avec le cahier";
+                mention.className = "text-base font-extrabold text-rose-600 mt-2";
+            }
+
+            const missedContainer = document.getElementById('res-missed-container');
+            if (qMissed.length === 0) {
+                missedContainer.innerHTML = `
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-5 text-center text-emerald-900">
+                        <i class="fa-solid fa-star text-amber-400 text-2xl mb-1"></i>
+                        <p class="font-extrabold">Score parfait ! Tu es prêt(e) pour l'évaluation.</p>
+                    </div>
+                `;
+            } else {
+                missedContainer.innerHTML = `
+                    <h3 class="text-base font-extrabold text-slate-900 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-book-open text-rose-600"></i> Notions à revoir dans ton cahier (${qMissed.length}) :
+                    </h3>
+                    <div class="space-y-3">
+                        ${qMissed.map(m => `
+                            <div class="p-4 rounded-2xl bg-rose-50/70 border border-rose-200 text-xs sm:text-sm">
+                                <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                                    <span class="font-bold text-slate-900">${m.q}</span>
+                                    <span class="bg-white text-rose-800 border border-rose-200 font-extrabold text-xs px-2.5 py-0.5 rounded-full">Cahier : ${m.page}</span>
+                                </div>
+                                <p class="text-emerald-800 font-bold text-xs mb-1"><i class="fa-solid fa-check mr-1"></i>Bonne réponse : ${m.opts[m.ans]}</p>
+                                <p class="text-slate-600 text-xs">${m.exp}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        }
+
+        function restartStudentQuiz() {
+            startStudentQuiz(qLastMode);
+        }
+
+        function quitStudentQuiz() {
+            resetStudentQuizView();
+        }
+
+        function resetStudentQuizView() {
+            document.getElementById('quiz-active-card').classList.add('hidden');
+            document.getElementById('quiz-results-card').classList.add('hidden');
+            document.getElementById('quiz-intro-card').classList.remove('hidden');
+        }
+
+        // =====================================================================
+        // LOGIQUE ONGLET 2B : LES 50 QUESTIONS DE RÉVISION
+        // =====================================================================
+        function render50Questions() {
+            const search = document.getElementById('q50-search').value.toLowerCase().trim();
+            const secFilter = document.getElementById('q50-section-filter').value;
+            const perFilter = document.getElementById('q50-period-filter').value;
+
+            const filtered = questions50Data.filter(item => {
+                const matchSec = secFilter === 'all' || item.sec === secFilter;
+                const matchPer = perFilter === 'all' || String(item.period) === perFilter;
+                const plainText = item.text.replace(/<[^>]*>/g, '').toLowerCase();
+                const matchSearch = !search || plainText.includes(search) || item.page.toLowerCase().includes(search);
+                return matchSec && matchPer && matchSearch;
+            });
+
+            document.getElementById('questions-count-badge').textContent = `${filtered.length} question${filtered.length > 1 ? 's' : ''} affichée${filtered.length > 1 ? 's' : ''}`;
+
+            const container = document.getElementById('q50-list-container');
+            container.innerHTML = '';
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full bg-white rounded-3xl p-8 text-center border border-slate-200 text-slate-500">
+                        <i class="fa-solid fa-magnifying-glass text-2xl mb-2 text-slate-400"></i>
+                        <p class="font-bold">Aucune question ne correspond à ta recherche.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl p-5 shadow-sm border border-slate-200/90 flex flex-col justify-between gap-4";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <span class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-2.5 py-0.5 rounded-lg">
+                                Question #${item.num}
+                            </span>
+                            <span class="text-[11px] font-bold text-slate-400">
+                                Devoir Période ${item.period}
+                            </span>
+                        </div>
+                        <p class="text-sm text-slate-800 leading-relaxed">${item.text}</p>
+                    </div>
+
+                    <div>
+                        <button onclick="toggleQuestionHint(${item.num})" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-3 py-1.5 rounded-xl transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                            <span>Voir un indice / la page</span>
+                        </button>
+                        <div id="hint-box-${item.num}" class="hidden mt-2.5 p-3 rounded-xl bg-amber-50/80 border border-amber-200 text-xs text-slate-700 fade-in">
+                            <p class="font-extrabold text-emerald-900 mb-1"><i class="fa-solid fa-book-open mr-1"></i> Cahier Complètement Géo : ${item.page}</p>
+                            <p>${item.hint}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function toggleQuestionHint(num) {
+            const box = document.getElementById(`hint-box-${num}`);
+            if (box) box.classList.toggle('hidden');
+        }
+
+        // =====================================================================
+        // LOGIQUE ONGLET 2C : LEXIQUE PFEQ (FLASHCARDS)
+        // =====================================================================
+        function renderFlashcards() {
+            const grid = document.getElementById('flashcards-grid');
+            grid.innerHTML = '';
+
+            pfeqLexiqueData.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = "flashcard h-56 cursor-pointer perspective-1000";
+                card.onclick = () => card.classList.toggle('flipped');
+
+                card.innerHTML = `
+                    <div class="flashcard-inner relative w-full h-full">
+                        <!-- Face avant : Concept PFEQ -->
+                        <div class="flashcard-front absolute inset-0 bg-gradient-to-br from-emerald-800 to-teal-800 text-white rounded-3xl p-6 shadow-md flex flex-col justify-between border border-emerald-700">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-extrabold uppercase tracking-wider bg-white/15 px-2.5 py-1 rounded-full">Concept PFEQ #${idx + 1}</span>
+                                <span class="text-xs font-bold text-amber-300">${item.page}</span>
+                            </div>
+                            <div class="text-center my-auto">
+                                <h3 class="text-lg sm:text-xl font-extrabold tracking-wide">${item.term}</h3>
+                            </div>
+                            <p class="text-[11px] text-emerald-200 text-center">
+                                <i class="fa-solid fa-hand-pointer mr-1"></i> Cliquer pour voir la définition
+                            </p>
+                        </div>
+
+                        <!-- Face arrière : Définition -->
+                        <div class="flashcard-back absolute inset-0 bg-white text-slate-800 rounded-3xl p-6 shadow-md border-2 border-emerald-500 flex flex-col justify-between">
+                            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                                <span class="text-xs font-extrabold text-emerald-800">${item.term}</span>
+                                <span class="text-[11px] font-bold text-slate-400">${item.page}</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed my-auto">
+                                ${item.def}
+                            </p>
+                            <p class="text-[11px] text-slate-400 text-center">
+                                <i class="fa-solid fa-rotate mr-1"></i> Cliquer pour retourner
+                            </p>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function flipAllCards(flippedState) {
+            document.querySelectorAll('.flashcard').forEach(c => {
+                if (flippedState) c.classList.add('flipped');
+                else c.classList.remove('flipped');
+            });
+        }
+
+        // =====================================================================
+        // MODALE GITHUB PAGES & TÉLÉCHARGEMENT AUTONOME INDEX.HTML
+        // =====================================================================
+        function openGithubModal() {
+            document.getElementById('github-modal').classList.remove('hidden');
+        }
+        function closeGithubModal() {
+            document.getElementById('github-modal').classList.add('hidden');
+        }
+
+        function downloadIndexHtml() {
+            closeGithubModal();
+            const fullSource = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+            const blob = new Blob([fullSource], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'index.html';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        // =====================================================================
+        // INITIALISATION AU CHARGEMENT DE LA PAGE
+        // =====================================================================
+        window.onload = function() {
+            loadTeacherState();
+            updateTeacherProgress();
+            renderTeacherPeriods();
+            render50Questions();
+            renderFlashcards();
+        };
+    </script>
+</body>
+</html>
